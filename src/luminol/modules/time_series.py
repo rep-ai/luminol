@@ -21,7 +21,7 @@ class TimeSeries(object):
         # Clean the time series by removing null values.
         for ts in sorted(series):
             if series[ts] is not None:
-                self.timestamps.append(int(ts))
+                self.timestamps.append(float(ts))
                 self.values.append(float(series[ts]))
 
     @property
@@ -167,7 +167,8 @@ class TimeSeries(object):
                             other_type = type(other[key])
                             other_op = vars(other_type).get(op.__name__)
                             if other_op:
-                                output[key] = other_op(other_type(value), other[key])
+                                output[key] = other_op(
+                                    other_type(value), other[key])
                         else:
                             output[key] = result
                     except ZeroDivisionError:
@@ -261,10 +262,12 @@ class TimeSeries(object):
             pre = self.values[0]
             next = self.values[-1]
             for key, value in self.items():
-                forward_smooth[key] = smoothing_factor * pre + (1 - smoothing_factor) * value
+                forward_smooth[key] = smoothing_factor * \
+                    pre + (1 - smoothing_factor) * value
                 pre = forward_smooth[key]
             for key, value in reversed(self.items()):
-                backward_smooth[key] = smoothing_factor * next + (1 - smoothing_factor) * value
+                backward_smooth[key] = smoothing_factor * \
+                    next + (1 - smoothing_factor) * value
                 next = backward_smooth[key]
             for key in forward_smooth.keys():
                 output[key] = (forward_smooth[key] + backward_smooth[key]) / 2
