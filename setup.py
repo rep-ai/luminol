@@ -3,14 +3,14 @@
 from setuptools import setup, find_packages
 
 with open('VERSION') as f:
-      luminol_version = f.read().strip()
+    luminol_version = f.read().strip()
 
 with open('requirements.txt') as f:
-      required = f.read().splitlines()
+    required = f.read().splitlines()
 
 setup(name="luminol",
       description='luminol is an anomaly detection and correlation library for timeseries data.',
-      url='https://github.com/linkedin/luminol',
+      url='https://github.com/aaronmanning613/luminol',
       author='Naarad Developers',
       author_email='naarad-dev@googlegroups.com',
       version=luminol_version,
