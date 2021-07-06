@@ -519,6 +519,16 @@ class TestAnomalyDetector(unittest.TestCase):
         )
         assert len(detector.anomalies) > 0
 
+    def test_timestamp_float(self):
+        """
+        Test if timestamps can be floats
+        """
+        ts = {0.0: 2, 0.1: 3, 0.2: 150, 0.3: 5, 0.4: 1, 0.5: 2, 0.6: 2, 0.7: 2, 0.8: 0}
+        detector = AnomalyDetector(
+            ts, score_threshold=50, algorithm_name="derivative_detector"
+        )
+        assert len(detector.anomalies) > 0
+
 
 class CustomAlgo(AnomalyDetectorAlgorithm):
     """
